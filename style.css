@@ -1,0 +1,96 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: fixed; /* 고정 위치 설정 */
+    height: 100vh; /* 화면 높이만큼 설정 */
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+    display: flex; /* flexbox 레이아웃 사용 */
+    flex-direction: column; /* 세로 방향으로 요소 배치 */
+}
+
+.sidebar-header {
+    text-align: center; /* 가운데 정렬 */
+    margin-bottom: 20px; /* 간격 추가 */
+}
+/* Google Fonts에서 폰트 가져오기 */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.sidebar-header h1 {
+    font-family: 'Lobster', cursive; /* 폰트 적용 */
+    font-size: 1em;
+    color: #fff;
+    /* 추가적인 스타일 */
+}
+
+.sidebar-header p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.sidebar nav {
+    flex-grow: 1; /* 남은 공간 모두 차지 */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #555;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 240px; /* 사이드바 너비(200px) + padding(20px * 2) */
+}
+
+#project-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project-item {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.project-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.project-detail {
+    display: none; /* Initially hidden */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}

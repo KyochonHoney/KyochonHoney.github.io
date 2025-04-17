@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 상세 정보</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 스타일 추가 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex; /* flexbox 레이아웃 사용 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
+            min-height: 100vh; /* 최소 높이를 화면 높이로 설정 */
+        }
+
+        .container {
+            width: 80%; /* 컨테이너 너비 설정 */
+            max-width: 800px; /* 최대 너비 설정 */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* 텍스트 중앙 정렬 */
+            display: flex; /* flexbox 레이아웃 사용 */
+            flex-direction: column; /* 세로 방향으로 요소 배치 */
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #007bff; /* 제목 색상 변경 */
+            font-weight: bold; /* 제목 두께 변경 */
+            font-size: 2em; /* 글자 크기 키우기 */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        main {
+            margin-top: 20px; /* main 요소 위쪽 여백 추가 */
+        }
+    </style>
+    <script>
+        // URL 파라미터에서 ID 가져오는 함수
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = function() {
+            const projectId = getParameterByName('id'); // URL에서 ID 가져오기
+
+            // script.js에 있는 projects 배열 (가정)
+            const projects = [
+                {
+                    title: "프로젝트 1",
+                    image: "linux.jpg",
+                    id: "project1",
+                    description: "프로젝트 1에 대한 설명입니다."
+                },
+                {
+                    title: "프로젝트 2",
+                    image: "image2.jpg",
+                    id: "project2",
+                    description: "프로젝트 2에 대한 설명입니다."
+                },
+                // ... script.js의 projects 배열과 동일해야 함
+            ];
+
+            // ID에 해당하는 프로젝트 찾기
+            const project = projects.find(p => p.id === projectId);
+
+            // 프로젝트 정보를 화면에 표시
+            if (project) {
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('project-image').src = project.image;
+                document.getElementById('project-image').alt = project.title;
+                document.getElementById('project-description').textContent = project.description;
+            } else {
+                document.getElementById('project-title').textContent = "프로젝트를 찾을 수 없습니다.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>프로젝트 상세 정보</h1>
+        </header>
+        <main>
+            <h2 id="project-title"></h2>
+            <img id="project-image" src="" alt="">
+            <p id="project-description"></p>
+        </main>
+    </div>
+</body>
+</html>
