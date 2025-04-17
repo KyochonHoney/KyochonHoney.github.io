@@ -94,3 +94,8 @@ body {
     border: 1px solid #ddd;
     margin-top: 20px;
 }
+
+.custom-link {
+    color: inherit;
+    text-decoration: none;
+}
