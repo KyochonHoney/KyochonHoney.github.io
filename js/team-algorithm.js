@@ -23,40 +23,12 @@ class TeamBalancer {
             teamCount = 2; // 기본값
         }
 
-        // 벤치 선수 처리: 인원이 팀 수로 나누어떨어지지 않으면 중간 레벨 선수를 벤치로
-        const { playingMembers, benchMembers } = this.separateBenchPlayers(members, teamCount);
+        // 전원 경기 참여 (벤치 없음) - 팀 수로 나누어떨어지지 않으면 일부 팀이 1명 더 많음
+        // 매번 다른 결과를 위해 한 번만 랜덤 셔플 후 바로 분배
+        const randomMembers = this.shuffleArray([...members]);
+        const teams = this.distributeTeams(randomMembers, teamCount);
 
-        if (playingMembers.length < 2) {
-            return {
-                success: false,
-                message: '경기 가능한 멤버가 부족합니다.'
-            };
-        }
-
-        // 최적 밸런스 찾기 (여러 번 시도)
-        let bestResult = null;
-        let bestBalance = Infinity;
-        const attempts = 50; // 50번 시도
-
-        for (let attempt = 0; attempt < attempts; attempt++) {
-            // 매번 새로 랜덤 셔플
-            const randomMembers = this.shuffleArray([...playingMembers]);
-
-            // 팀 분배
-            const teams = this.distributeTeams(randomMembers, teamCount);
-
-            // 밸런스 계산
-            const balance = this.calculateBalance(teams);
-
-            // 더 좋은 밸런스를 찾으면 업데이트
-            if (balance < bestBalance) {
-                bestBalance = balance;
-                bestResult = teams;
-            }
-        }
-
-        // 결과 포맷팅 (벤치 정보 포함)
-        return this.formatResult(bestResult, teamCount, benchMembers);
+        return this.formatResult(teams, teamCount, []);
     }
 
     /**
@@ -109,8 +81,10 @@ class TeamBalancer {
     static distributeTeams(members, teamCount) {
         const teams = Array.from({ length: teamCount }, () => []);
 
+        // 시작 팀을 랜덤으로 정해서 어느 팀이 1명 더 받을지 무작위로 결정
+        const startTeam = Math.floor(Math.random() * teamCount);
         members.forEach((member, index) => {
-            teams[index % teamCount].push(member);
+            teams[(index + startTeam) % teamCount].push(member);
         });
 
         return teams;

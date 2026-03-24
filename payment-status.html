@@ -135,7 +135,10 @@
     <nav class="navbar">
         <div class="container">
             <a href="/" class="navbar-brand">⚽ FC PIR</a>
-            <div class="navbar-menu">
+            <button class="navbar-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="navbar-menu" id="navMenu">
                 <a href="/">홈</a>
                 <a href="/team-generator.html">팀 편성</a>
                 <a href="/payment-status.html">회비 현황</a>
@@ -321,5 +324,6 @@
             });
         });
     </script>
+    <script src="/assets/js/nav.js"></script>
 </body>
 </html>
