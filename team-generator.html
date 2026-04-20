@@ -596,9 +596,13 @@
                 </div>
             `).join('');
 
+            const diffLabel = result.balance_metric === 'avg'
+                ? `평균 레벨 차이 ${result.level_diff} <span style="font-size:0.78rem;opacity:0.75;">(인원 불균형 — 평균 기준)</span>`
+                : `레벨 차이 ${result.level_diff}`;
+
             el.innerHTML = `
                 <div class="result-summary" style="background:${summaryBg};color:${qualityColor};">
-                    밸런스 ${qualityText} &nbsp;·&nbsp; 레벨 차이 ${result.level_diff}
+                    밸런스 ${qualityText} &nbsp;·&nbsp; ${diffLabel}
                 </div>
                 <div class="result-teams">${teamCards}</div>
             `;
